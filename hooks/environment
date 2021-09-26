@@ -45,6 +45,7 @@ load_all_secrets_into_env() {
 
 # parse env items
 while IFS='=' read -r name _ ; do
+  echo "READ: $name"
   if [[ $name =~ ^(BUILDKITE_PLUGIN_AWS_SM_ENV_) ]] ; then
     # Special nested value (rather than just a secret id)
     if [[ $name =~ (_SECRET_ID)$ ]] ; then
