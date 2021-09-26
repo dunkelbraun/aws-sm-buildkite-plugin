@@ -9,6 +9,8 @@ DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 echo "--- :aws::key: Reading secrets from AWS SM"
 
+env
+
 load_secret_into_env() {
   local export_name="$1"
   local secret_id="$2"
@@ -43,7 +45,6 @@ load_all_secrets_into_env() {
 
 # parse env items
 while IFS='=' read -r name _ ; do
-  echo "PARSE ENV ITEMS"
   if [[ $name =~ ^(BUILDKITE_PLUGIN_AWS_SM_ENV_) ]] ; then
     # Special nested value (rather than just a secret id)
     if [[ $name =~ (_SECRET_ID)$ ]] ; then
